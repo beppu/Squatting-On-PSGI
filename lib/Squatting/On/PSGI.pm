@@ -24,8 +24,7 @@ $p{init_cc} = sub {
 
 # \%input = i($env)  # Extract CGI parameters from an env object
 $p{i} = sub {
-  local *ENV = $_[0];
-  my $q = CGI->new;
+  my $q = CGI::PSGI->new($_[0]);
   my %i = $q->Vars;
   +{ map {
     if ($i{$_} =~ /\0/) {
