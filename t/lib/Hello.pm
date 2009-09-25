@@ -7,14 +7,16 @@
     package Hello::Controllers;
     use Squatting ':controllers';
 
+    my $home = sub {
+        my $self = shift;
+        $self->v->{title} = "Hello world";
+        $self->v->{message} = "Your name: " . $self->input->{name};
+        $self->render('home');
+    };
     our @C = (
         C( Home => ['/'],
-           get => sub {
-               my $self = shift;
-               $self->v->{title} = "Hello world";
-               $self->v->{message} = "Your name: " . $self->input->{name};
-               $self->render('home');
-           } ),
+           get => $home,
+           post => $home ),
     );
 }
 {
