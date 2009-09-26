@@ -14,7 +14,7 @@ $p{init_cc} = sub {
   my ($c, $env)  = @_;
   my $cc       = $c->clone;
   $cc->env     = $env;
-  $cc->cookies = $p{c}->($env->{HTTP_COOKIE});
+  $cc->cookies = $p{c}->($env->{HTTP_COOKIE} || '');
   $cc->input   = $p{i}->($env);
   $cc->headers = { 'Content-Type' => 'text/html' };
   $cc->v       = { };
