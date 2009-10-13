@@ -16,6 +16,9 @@ test_tcp(
         like $res->content, qr/Your name: baz/;
         $res = $ua->post("http://127.0.0.1:$port/", { name => "xxx" });
         like $res->content, qr/Your name: xxx/;
+
+        $res = $ua->get("http://127.0.0.1:$port/multi?q=a&q=b");
+        like $res->content, qr/a,b/;
     },
     server => sub {
         my $port = shift;

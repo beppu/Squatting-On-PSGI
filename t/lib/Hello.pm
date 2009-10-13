@@ -17,6 +17,12 @@
         C( Home => ['/'],
            get => $home,
            post => $home ),
+        C( Multi => ['/multi'],
+           get => sub {
+               my $self = shift;
+               $self->{v}->{message} = join ",", @{$self->input->{'q'}};
+               $self->render('home');
+           } ),
     );
 }
 {
