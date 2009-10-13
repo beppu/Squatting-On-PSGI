@@ -95,7 +95,9 @@ Squatting::On::PSGI is an adapter to run Squatting apps on PSGI implementations.
 
 =head1 AUTHOR
 
-Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
+Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt> (original author)
+
+John Beppu E<lt>beppu@cpan.orgE<gt> (current maintainer)
 
 =head1 LICENSE
 
