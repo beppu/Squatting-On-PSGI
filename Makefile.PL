@@ -2,7 +2,7 @@ use inc::Module::Install;
 name 'Squatting-On-PSGI';
 all_from 'lib/Squatting/On/PSGI.pm';
 
-requires 'CGI::PSGI';
+requires 'Plack::Request';
 requires 'Squatting';
 
 build_requires 'Test::More';

@@ -4,8 +4,8 @@ use strict;
 use 5.008_001;
 our $VERSION = '0.01';
 
-use CGI::PSGI;
 use CGI::Cookie;
+use Plack::Request;
 use Squatting::H;
 
 # p for private
@@ -24,15 +24,9 @@ $p{init_cc} = sub {
 
 # \%input = i($env)  # Extract CGI parameters from an env object
 $p{i} = sub {
-  my $q = CGI::PSGI->new($_[0]);
-  my %i = $q->Vars;
-  +{ map {
-    if ($i{$_} =~ /\0/) {
-      $_ => [ split("\0", $i{$_}) ];
-    } else {
-      $_ => $i{$_};
-    }
-  } keys %i }
+  my $r = Plack::Request->new($_[0]);
+  my $p = $r->params;
+  +{%$p};
 };
 
 # \%cookies = $p{c}->($cookie_header)  # Parse Cookie header(s).
