@@ -2,7 +2,7 @@ package Squatting::On::PSGI;
 
 use strict;
 use 5.008_001;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use CGI::Cookie;
 use Plack::Request;
