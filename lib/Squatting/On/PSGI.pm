@@ -18,6 +18,7 @@ $p{init_cc} = sub {
   $cc->input   = $p{i}->($env);
   $cc->headers = { 'Content-Type' => 'text/html' };
   $cc->v       = { };
+  $cc->state   = $env->{'psgix.session'};
   $cc->status  = 200;
   $cc;
 };
@@ -38,9 +39,9 @@ sub psgi {
 
   $env->{PATH_INFO} ||= "/";
   $env->{REQUEST_PATH} ||= do {
-      my $script_name = $env->{SCRIPT_NAME};
-      $script_name =~ s{/$}{};
-      $script_name . $env->{PATH_INFO};
+    my $script_name = $env->{SCRIPT_NAME};
+    $script_name =~ s{/$}{};
+    $script_name . $env->{PATH_INFO};
   };
   $env->{REQUEST_URI} ||= do {
     ($env->{QUERY_STRING})
@@ -50,20 +51,16 @@ sub psgi {
 
   my $res;
   eval {
-      no strict 'refs';
-      my ($c, $args) = &{ $app . "::D" }($env->{REQUEST_PATH});
-      my $cc = $p{init_cc}->($c, $env);
-      my $content = $app->service($cc, @$args);
+    no strict 'refs';
+    my ($c, $args) = &{ $app . "::D" }($env->{REQUEST_PATH});
+    my $cc = $p{init_cc}->($c, $env);
+    my $content = $app->service($cc, @$args);
 
-      $res = [
-          $cc->status,
-          [ %{ $cc->{headers} } ],
-          [ $content ],
-      ];
+    $res = [ $cc->status, [ %{ $cc->{headers} } ], [$content], ];
   };
 
   if ($@) {
-      $res = [ 500, [ 'Content-Type' => 'text/plain' ], [ "<pre>$@</pre>" ] ];
+    $res = [ 500, [ 'Content-Type' => 'text/plain' ], ["<pre>$@</pre>"] ];
   }
 
   return $res;
