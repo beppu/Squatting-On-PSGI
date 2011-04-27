@@ -1,5 +1,9 @@
 Revision history for Perl extension Squatting::On::PSGI
 
+0.05  Wed Apr 27 04:38:04 PDT 2011
+  - support for Plack::Middleware
+  - updated tests to work w/ Squatting 0.80
+
 0.04  Fri Mar 12 10:58:43 PST 2010
   - use parameters() instead of param(),
     because the latter has been deprecated in Plack::Request.
