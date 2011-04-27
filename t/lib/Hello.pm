@@ -1,11 +1,10 @@
 {
     package Hello;
-    use base qw(Squatting);
+    use Squatting;
 }
 
 {
     package Hello::Controllers;
-    use Squatting ':controllers';
 
     my $home = sub {
         my $self = shift;
@@ -27,7 +26,6 @@
 }
 {
     package Hello::Views;
-    use Squatting ':views';
 
     our @V = (
         V(
