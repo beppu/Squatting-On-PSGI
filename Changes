@@ -1,5 +1,8 @@
 Revision history for Perl extension Squatting::On::PSGI
 
+0.06  Fri Apr 29 21:09:58 PDT 2011
+  - require latest Squatting
+
 0.05  Wed Apr 27 04:38:04 PDT 2011
   - support for Plack::Middleware
   - updated tests to work w/ Squatting 0.80
