@@ -3,7 +3,7 @@ name 'Squatting-On-PSGI';
 all_from 'lib/Squatting/On/PSGI.pm';
 
 requires 'Plack::Request';
-requires 'Squatting';
+requires 'Squatting' => '0.81';
 
 build_requires 'Test::More';
 use_test_base;
