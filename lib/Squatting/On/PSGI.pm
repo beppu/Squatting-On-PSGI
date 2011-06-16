@@ -60,6 +60,7 @@ sub psgi {
   };
 
   if ($@) {
+    die $@ if (ref($@) =~ /^HTTP::Exception/);
     $res = [ 500, [ 'Content-Type' => 'text/plain' ], ["<pre>$@</pre>"] ];
   }
 
