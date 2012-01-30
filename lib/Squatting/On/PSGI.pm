@@ -31,7 +31,7 @@ $p{i} = sub {
 
 # \%cookies = $p{c}->($cookie_header)  # Parse Cookie header(s).
 $p{c} = sub {
-  +{ map { ref($_) ? $_->value : $_ } CGI::Cookie->parse($_[0]) };
+  +{ map { ref($_) ? scalar $_->value : scalar $_ } CGI::Cookie->parse($_[0]) };
 };
 
 sub psgi {
